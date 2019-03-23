@@ -1,0 +1,36 @@
+
+
+
+.QuoteList {
+  margin-top: 125px;
+
+}
+
+
+.QuoteListItem {
+  margin-top: 65px;
+  margin-bottom: 25px;
+  &::after {
+    content: "";
+    border-bottom: 1px solid #d7d7d7;
+    width: 90%;
+    margin-top: 10px;
+  }
+
+ 
+
+  .delete-quote,.update-quote {
+    cursor: pointer;
+    padding: 4px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .qoute-cols {
+      margin-top: 10px;
+    }
+  }
+
+}
