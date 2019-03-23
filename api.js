@@ -25,9 +25,6 @@ if(req.query.author) {
         res.send(err.message)
       }
       else {
-        for(let i = 0; i < rows.length; i++) {
-          console.log(rows[i].quote)
-        }
         res.json(rows);
       }
     });
@@ -44,7 +41,6 @@ api.get('/quotes/:id', function(req, res) {
       res.send({});
     }
     else {
-      console.log("return quote with ID: " + req.params.id, row)
       res.json(row);
     }
   });
@@ -87,7 +83,6 @@ api.put('/quotes/:id', (req, res) => {
 
 api.delete('/quotes/:id', (req, res) => {
   const {id} = req.params;
-  console.log(id);
   db.run('DELETE FROM quotes WHERE id = ?', id, (err) => {
     if(err) {
       console.log(err.message)
