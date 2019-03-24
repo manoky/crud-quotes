@@ -52,11 +52,18 @@ api.post('/quotes', (req, res) => {
   const {quote, image, author} = req.body
   
   db.run('INSERT INTO quotes(quote,author,image) VALUES (?, ?, ?)',
-   [quote, author, image], (err, rows) => {
+   [quote, author, image], (err) => {
     if(err) {
       console.log(err.message);
     }else {
-      res.json(rows)
+      //could return just the added quote 
+      db.get('SELECT * FROM quotes WHERE quote = ?',[quote], (err, row) => {
+        if(err) {
+          console.log(err)
+        }else {
+          res.json(row)
+        }
+      })
     }
   });
 });
@@ -88,7 +95,6 @@ api.delete('/quotes/:id', (req, res) => {
       console.log(err.message)
     }else {
       res.send(`quote with id:${id} removed`);
-      console.log('deleted : ' + id,)
     }
   });
 });

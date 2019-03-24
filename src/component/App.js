@@ -8,7 +8,6 @@ import './App.scss';
 class App extends Component {
   state = {
     quotes: [],
-    currentQuote: null,
     adding: false,
   }
   
@@ -53,18 +52,20 @@ class App extends Component {
   deleteQuote = (id) => {
     axios.delete(`/api/quotes/${id}`)
       .then(() => this.setState(prevState => ({
-        quotes: prevState.quotes.filter(q => q.id !== id)
+        quotes: prevState.quotes.filter(q => q.id !== id).sort((a,b) => b-a)
       })))
       .catch(err => console.log(err))
   }
 
   render() {
-    const { quotes, adding, show } = this.state;
+    const { quotes, adding } = this.state;
+    // return quotes in a descending order
+    const sortedQoutes = quotes.sort((a,b) => b-a);
     return (
       <div className="container-fluid">
         <Header add= {this.add}/>
         <QuoteList
-         quotes={quotes}
+         quotes={sortedQoutes}
          addQuote={this.addQuote}
          adding={adding}
          deleteQuote={this.deleteQuote}
