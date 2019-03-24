@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faIgloo,faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons'
+library.add(faIgloo,faTrashAlt, faEdit)
 
 class QuoteListItem extends Component {
 
@@ -79,10 +84,12 @@ class QuoteListItem extends Component {
       <div className="col-md-3 qoute-cols">{this.props.quote.quote}</div>
       <div className="col-md-3 qoute-cols"> - {this.props.quote.author}</div>
       <div className="col-md-3 qoute-cols"> 
-        <span className="delete-quote" onClick={()=> 
-                            this.props.deleteQuote(this.props.quote.id)}
-                            >delete</span>&nbsp;&nbsp;
-        <span className="update-quote" onClick={this.update}>update</span>
+        <span className="delete-quote" onClick={()=> this.props.deleteQuote(this.props.quote.id)}>
+          <FontAwesomeIcon icon="trash-alt" />
+        </span>&nbsp;&nbsp;
+        <span className="update-quote" onClick={this.update}>
+          <FontAwesomeIcon icon="edit"/>
+        </span>
       </div>
     </div>
   )
@@ -94,5 +101,10 @@ class QuoteListItem extends Component {
   }
 }
 
+QuoteListItem.propTypes = {
+  quote: PropTypes.object,
+  updateQuote: PropTypes.func,
+  deleteQuote: PropTypes.func,
+}
 
 export default QuoteListItem;

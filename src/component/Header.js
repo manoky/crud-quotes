@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Header = ({add}) => (
   <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -22,5 +23,9 @@ const Header = ({add}) => (
     </div>
   </nav>
 );
+
+Header.propTypes = {
+  add: PropTypes.func,
+}
 
 export default Header;
